@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 typedef struct __list {
     int data;
     struct __list *next;
@@ -65,12 +66,15 @@ int main()
 	node3->next = node4;
 	node4->data = 5;
 	node4->next = NULL;
+	
 	list *head = sort(node1);
 	printf("After sorting:\n");
+	
 	while(head)
 	{
 		printf("%d ",head->data);
 		head = head->next;
 	}
+	
 	return 0;
 }

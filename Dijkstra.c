@@ -1,4 +1,4 @@
-/* Dijkstra's Algorithm in C */
+/* Dijkstra's Algorithm in C    輸入 src dst求得兩點最短距離*/
 #include<stdio.h>
 #include<conio.h>
 #include<process.h>

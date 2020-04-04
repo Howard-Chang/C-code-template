@@ -78,3 +78,56 @@ int main()
 	
 	return 0;
 }
+
+// another one:
+struct ListNode* mergeList(struct ListNode* list1,struct ListNode* list2){
+    struct ListNode* head=NULL;
+    if(list1->val<list2->val){
+        head=list1;
+        list1=list1->next;
+    }else{
+        head=list2;
+        list2=list2->next;
+    }
+    struct ListNode* q=head;
+    while(list1!=NULL&&list2!=NULL){
+        if(list1->val<list2->val){
+            q->next=list1;
+            list1=list1->next;
+        }else{
+            q->next=list2;
+            list2=list2->next;
+        }
+        q=q->next;
+    }
+    struct ListNode* p=NULL;
+    if(list1==NULL){
+        p=list2;
+    }else{
+        p=list1;
+    }
+    q->next=p;
+    return head;
+}
+struct ListNode* sortList(struct ListNode* head){
+    if(head==NULL||head->next==NULL){
+        return head;
+    }
+    if(head->next->next==NULL){
+        if(head->val>head->next->val){
+            struct ListNode* tmp=head->next;
+            tmp->next=head;
+            tmp->next->next=NULL;
+            return tmp;
+        }
+    }
+    struct ListNode* fast=head;
+    struct ListNode* slow=head; 
+    while(fast->next!=NULL&&fast->next->next!=NULL){
+        fast=fast->next->next;
+        slow=slow->next;
+    }
+    fast=slow->next;
+    slow->next=NULL;
+    return mergeList(sortList(head),sortList(fast));
+}
